@@ -1,3 +1,8 @@
+# Ahmad Hamdy
+# There was a critical bug in this file
+# When defining arguments I put nargs = '+' in the afile argument
+# Although afile was defined as str, it could now accept multiple strings, which made it an array of strings
+# This gave a critical error that was very difficult to identify
 import argparse
 import os
 
@@ -5,7 +10,7 @@ import os
 # Collecting command line arguments
 parser = argparse.ArgumentParser('updatecfg')
 parser.add_argument('-d', '--dir', required = True, type = str, nargs = '+', metavar = '', help = 'Directories to search')
-parser.add_argument('-a', '--authfile', required = False, type = str, nargs = '+', metavar = '', help = 'authfile')
+parser.add_argument('-a', '--afile', required = False, type = str, default = r'readme1.txt', metavar = '', help = 'authfile')
 
 args = parser.parse_args()
 
@@ -27,7 +32,8 @@ def updatefile():
                         with open(tempname,'w') as outfile :
                             for line in infile.readlines():
                                 if 'auth-user-pass'.lower() in line.lower():
-                                    line = 'auth-user-pass readme1.txt\n'
+                                    line = 'auth-user-pass ' + args.afile + '\n'
+                                    type(line)
                                 outfile.write(line)
                     # Do final cleanup, remove original file and rename tmp file to be same as original
                     os.remove(filepath)
