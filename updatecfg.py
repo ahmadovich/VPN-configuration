@@ -33,6 +33,8 @@ def updatefile():
                             for line in infile.readlines():
                                 if 'auth-user-pass'.lower() in line.lower():
                                     line = 'auth-user-pass ' + args.afile + '\n'
+                                    # openvpn requires double backslash in file paths
+                                    line = line.replace("\\","\\\\")
                                     type(line)
                                 outfile.write(line)
                     # Do final cleanup, remove original file and rename tmp file to be same as original
