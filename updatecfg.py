@@ -5,7 +5,7 @@ import os
 # Collecting command line arguments
 parser = argparse.ArgumentParser('updatecfg')
 parser.add_argument('-d', '--dir', required = True, type = str, nargs = '+', metavar = '', help = 'Directories to search')
-parser.add_argument('-a', '--authfile', required = False, type = str, nargs = '+', metavar = '', help = 'authfile')
+parser.add_argument('-a', '--authfile', required = False, type = str, metavar = '', help = 'authfile')
 
 args = parser.parse_args()
 
@@ -27,7 +27,7 @@ def updatefile():
                         with open(tempname,'w') as outfile :
                             for line in infile.readlines():
                                 if 'auth-user-pass'.lower() in line.lower():
-                                    line = 'auth-user-pass readme1.txt\n'
+                                    line = 'auth-user-pass ' + args.authfile + '\n'
                                 outfile.write(line)
                     # Do final cleanup, remove original file and rename tmp file to be same as original
                     os.remove(filepath)
