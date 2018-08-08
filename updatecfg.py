@@ -10,7 +10,7 @@ import os
 # Collecting command line arguments
 parser = argparse.ArgumentParser('updatecfg')
 parser.add_argument('-d', '--dir', required = True, type = str, nargs = '+', metavar = '', help = 'Directories to search')
-<<<<<<< HEAD
+
 parser.add_argument('-a', '--authfile', required = False, type = str, metavar = '', help = 'authfile')
 
 
